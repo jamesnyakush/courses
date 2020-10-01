@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.jnyakush.course.ui.fragment.course.AddCourses">
+    tools:context=".ui.fragment.course.AddCourses">
 
 
     <com.google.android.material.textfield.TextInputLayout

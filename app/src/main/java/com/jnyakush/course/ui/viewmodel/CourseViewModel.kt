@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.jnyakush.course.data.repository.CourseRepository
 
 
-class CourseViewModel(
+class CourseViewModel constructor(
     private val repository: CourseRepository
 ) : ViewModel() {
 
@@ -15,7 +15,7 @@ class CourseViewModel(
         description: String,
         instructor: String
     ) {
-
+        //repository.postCourse(courseCode, courseName, description, instructor)
     }
 
     fun fetchCourses() {
