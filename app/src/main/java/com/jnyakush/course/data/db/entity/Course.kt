@@ -1,4 +1,4 @@
-package com.jnyakush.course.data.db.models
+package com.jnyakush.course.data.db.entity
 
 import com.google.gson.annotations.SerializedName
 

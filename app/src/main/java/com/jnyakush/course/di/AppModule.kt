@@ -12,32 +12,33 @@ import retrofit2.converter.gson.GsonConverterFactory
 object AppModule {
 
 
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
+    fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(ApiClient.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
 
-
-    fun provideApiClient(retrofit: Retrofit): ApiClient =
+    fun providesApiClient(retrofit: Retrofit): ApiClient =
         retrofit.create(ApiClient::class.java)
 
 
     /**
      * Initialize OkhttpClient with our interceptor
      */
-    fun provideOkhttpClient(authInterceptor: AuthInterceptor): OkHttpClient =
+    fun providesOkhttpClient(authInterceptor: AuthInterceptor): OkHttpClient =
         OkHttpClient.Builder()
             .addInterceptor(authInterceptor)
             .build()
 
-    fun provideAuthInterceptor(sessionManager: SessionManager): AuthInterceptor =
+
+
+    fun providesAuthInterceptor(sessionManager: SessionManager): AuthInterceptor =
         AuthInterceptor(sessionManager)
 
 
-    fun provideSessionManager(context: Context): SessionManager =
-        SessionManager(context)
 
+    fun providesSessionManager(context: Context): SessionManager =
+        SessionManager(context)
 
 }

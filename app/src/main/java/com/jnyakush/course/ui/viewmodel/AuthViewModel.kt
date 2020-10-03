@@ -10,6 +10,8 @@ class AuthViewModel constructor(
     private val sessionManager: SessionManager
 ) : ViewModel() {
 
+
+
     fun signIn(email: String, password: String) {
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -17,7 +19,6 @@ class AuthViewModel constructor(
         }
 
         //repository.signInUser(email, password)
-
         //sessionManager.saveAuthToken(loginResponse!!.accessToken)
     }
 

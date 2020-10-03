@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.jnyakush.course.R
-import com.jnyakush.course.data.db.models.Course
+import com.jnyakush.course.data.db.entity.Course
 import kotlinx.android.synthetic.main.course_item.view.*
 
 class CourseAdapter(

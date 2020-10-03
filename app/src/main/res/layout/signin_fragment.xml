@@ -20,7 +20,8 @@
                 android:id="@+id/log_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Email" />
+                android:inputType="textEmailAddress"
+                android:hint="@string/enter_email" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -33,7 +34,7 @@
                 android:id="@+id/log_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter password" />
+                android:hint="@string/enter_password" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -42,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Login"
+            android:text="@string/login"
             android:textAllCaps="false" />
 
         <TextView
@@ -51,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="Need an Account ?" />
+            android:text="@string/need_an_account" />
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

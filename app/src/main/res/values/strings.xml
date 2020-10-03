@@ -14,4 +14,6 @@
     <string name="enter_description">Enter Description</string>
     <string name="enter_instructor">Enter Instructor</string>
     <string name="add_course">Add Course</string>
+    <string name="login">Login</string>
+    <string name="need_an_account">Need an Account ?</string>
 </resources>

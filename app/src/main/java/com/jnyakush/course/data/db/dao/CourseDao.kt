@@ -1,11 +1,12 @@
 package com.jnyakush.course.data.db.dao
 
-import com.jnyakush.course.data.db.models.Course
+import androidx.lifecycle.LiveData
+import com.jnyakush.course.data.db.entity.Course
 
 
 interface CourseDao {
 
-    suspend fun insert(course: Course): Long
+    suspend fun insert(courses: List<Course>)
 
-    suspend fun getCourses()
+    suspend fun getCourses(): LiveData<List<Course>>
 }

@@ -7,7 +7,10 @@ class AuthRepository constructor(
     private val apiClient: ApiClient
 ) {
 
-    suspend fun signInUser(email: String, password: String) {
+    suspend fun signInUser(
+        email: String,
+        password: String
+    ) {
         apiClient.loginStudent(email, password)
     }
 
@@ -18,7 +21,6 @@ class AuthRepository constructor(
         phone: String,
         password: String
     ) {
-
         apiClient.registerStudent(firstname, lastname, email, phone, password)
     }
 }
