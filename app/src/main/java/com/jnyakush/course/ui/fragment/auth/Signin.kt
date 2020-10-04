@@ -5,9 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.jnyakush.course.R
 import com.jnyakush.course.utils.toast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.signin_fragment.*
 
 
+@AndroidEntryPoint
 class Signin : Fragment(R.layout.signin_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

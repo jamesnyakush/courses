@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_auth"
+    app:startDestination="@id/signin">
+
+    <fragment
+        android:id="@+id/signin"
+        android:name="com.jnyakush.course.ui.fragment.auth.Signin"
+        android:label="signin_fragment"
+        tools:layout="@layout/signin_fragment" />
+    <fragment
+        android:id="@+id/signup"
+        android:name="com.jnyakush.course.ui.fragment.auth.Signup"
+        android:label="signup_fragment"
+        tools:layout="@layout/signup_fragment" />
+</navigation>

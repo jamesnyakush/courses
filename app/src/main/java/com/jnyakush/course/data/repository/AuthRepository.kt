@@ -1,9 +1,10 @@
 package com.jnyakush.course.data.repository
 
 import com.jnyakush.course.data.retrofit.ApiClient
+import javax.inject.Inject
 
 
-class AuthRepository constructor(
+class AuthRepository @Inject constructor(
     private val apiClient: ApiClient
 ) {
 
