@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jnyakush.course.data.repository.AuthRepository
 import com.jnyakush.course.data.retrofit.response.LoginResponse
+import com.jnyakush.course.data.retrofit.response.RegisterResponse
 import com.jnyakush.course.utils.Resource
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 
 class AuthViewModel @ViewModelInject constructor(
@@ -20,6 +20,10 @@ class AuthViewModel @ViewModelInject constructor(
     private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
     val loginResponse: LiveData<Resource<LoginResponse>>
         get() = _loginResponse
+
+    private val _registerResponse: MutableLiveData<Resource<RegisterResponse>> = MutableLiveData()
+    val registerResponse: LiveData<Resource<RegisterResponse>>
+        get() = _registerResponse
 
     fun signIn(
         email: String,
@@ -33,11 +37,6 @@ class AuthViewModel @ViewModelInject constructor(
         repository.saveToken(token)
     }
 
-    fun fetchToken() {
-        Timber.tag("James").d(repository.fetchToken().toString())
-
-    }
-
 
     fun signUp(
         firstname: String,
@@ -46,9 +45,8 @@ class AuthViewModel @ViewModelInject constructor(
         phone: String,
         password: String
     ) = viewModelScope.launch {
-
-        repository.signUpUser(firstname, lastname, email, phone, password)
-
+        _registerResponse.value = Resource.Loading
+        _registerResponse.value = repository.signUpUser(firstname, lastname, email, phone, password)
     }
 
 }

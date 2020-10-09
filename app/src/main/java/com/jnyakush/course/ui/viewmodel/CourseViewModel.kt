@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jnyakush.course.data.repository.CourseRepository
+import com.jnyakush.course.data.retrofit.response.CourseResponse
 import com.jnyakush.course.data.retrofit.response.CoursesResponse
 import com.jnyakush.course.utils.Resource
 import kotlinx.coroutines.launch
@@ -15,9 +16,14 @@ class CourseViewModel @ViewModelInject constructor(
     private val repository: CourseRepository
 ) : ViewModel() {
 
-    private val _courseResponse: MutableLiveData<Resource<CoursesResponse>> = MutableLiveData()
+    private val _coursesResponse: MutableLiveData<Resource<CoursesResponse>> = MutableLiveData()
 
-    val courseResponse: LiveData<Resource<CoursesResponse>>
+    val coursesResponse: LiveData<Resource<CoursesResponse>>
+        get() = _coursesResponse
+
+    private val _courseResponse: MutableLiveData<Resource<CourseResponse>> = MutableLiveData()
+
+    val courseResponse: LiveData<Resource<CourseResponse>>
         get() = _courseResponse
 
 
@@ -26,12 +32,14 @@ class CourseViewModel @ViewModelInject constructor(
         courseName: String,
         description: String,
         instructor: String
-    ) {
-        //repository.postCourse(courseCode, courseName, description, instructor)
+    ) = viewModelScope.launch {
+        _courseResponse.value = Resource.Loading
+        _courseResponse.value =
+            repository.postCourse(courseCode, courseName, description, instructor)
     }
 
     fun fetchCourses() = viewModelScope.launch {
-        _courseResponse.value = Resource.Loading
-        _courseResponse.value = repository.getCourse()
+        _coursesResponse.value = Resource.Loading
+        _coursesResponse.value = repository.getCourse()
     }
 }

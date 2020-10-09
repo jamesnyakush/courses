@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.jnyakush.course.R
 import com.jnyakush.course.ui.activity.Course
 import com.jnyakush.course.ui.viewmodel.AuthViewModel
@@ -16,10 +17,11 @@ import com.jnyakush.course.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.signin_fragment.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 @AndroidEntryPoint
-class Signin : Fragment(R.layout.signin_fragment) {
+class Signin : Fragment(R.layout.signin_fragment), View.OnClickListener {
 
     private val viewModel by viewModels<AuthViewModel>()
 
@@ -33,19 +35,17 @@ class Signin : Fragment(R.layout.signin_fragment) {
                     lifecycleScope.launch {
                         viewModel.saveAuthToken(it.value.accessToken)
                         requireContext().startActivity(Intent(requireContext(), Course::class.java))
+                        Timber.d(it.value.message)
                     }
                 }
                 is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Failed", Toast.LENGTH_SHORT).show()
+                    Timber.d(it.errorBody.toString())
                 }
             }
         })
 
-        viewModel.fetchToken()
-
-        login_btn.setOnClickListener {
-            onValidate()
-        }
+        login_btn.setOnClickListener(this)
+        need_account.setOnClickListener(this)
 
     }
 
@@ -59,5 +59,17 @@ class Signin : Fragment(R.layout.signin_fragment) {
         }
 
         viewModel.signIn(email, password)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.need_account -> {
+                Navigation.findNavController(v).navigate(SigninDirections.actionSigninToSignup())
+            }
+
+            R.id.login_btn -> {
+                onValidate()
+            }
+        }
     }
 }

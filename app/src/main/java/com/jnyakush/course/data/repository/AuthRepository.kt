@@ -23,10 +23,6 @@ class AuthRepository @Inject constructor(
         sessionManager.saveAuthToken(token)
     }
 
-    fun fetchToken() {
-        sessionManager.fetchAuthToken()
-    }
-
     suspend fun signUpUser(
         firstname: String,
         lastname: String,

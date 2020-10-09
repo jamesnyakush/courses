@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jnyakush.course.R
 import com.jnyakush.course.ui.adapter.CourseAdapter
@@ -25,7 +26,7 @@ class Courses : Fragment(R.layout.courses_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        viewModel.courseResponse.observe(viewLifecycleOwner, Observer {
+        viewModel.coursesResponse.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
@@ -43,6 +44,10 @@ class Courses : Fragment(R.layout.courses_fragment) {
             }
         })
         viewModel.fetchCourses()
+
+        add_courses.setOnClickListener {
+            Navigation.findNavController(it).navigate(CoursesDirections.actionCoursesToAddCourses())
+        }
 
     }
 }

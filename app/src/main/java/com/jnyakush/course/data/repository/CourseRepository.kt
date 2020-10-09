@@ -40,7 +40,7 @@ class CourseRepository @Inject constructor(
         courseName: String,
         description: String,
         instructor: String
-    ) {
+    ) = safeApiCall {
         apiClient.createCourse(courseCode, courseName, description, instructor)
     }
 

@@ -9,10 +9,18 @@
         android:id="@+id/courses"
         android:name="com.jnyakush.course.ui.fragment.course.Courses"
         android:label="courses_fragment"
-        tools:layout="@layout/courses_fragment" />
+        tools:layout="@layout/courses_fragment" >
+        <action
+            android:id="@+id/action_courses_to_addCourses"
+            app:destination="@id/addCourses" />
+    </fragment>
     <fragment
         android:id="@+id/addCourses"
         android:name="com.jnyakush.course.ui.fragment.course.AddCourses"
         android:label="add_courses_fragment"
-        tools:layout="@layout/add_courses_fragment" />
+        tools:layout="@layout/add_courses_fragment" >
+        <action
+            android:id="@+id/action_addCourses_to_courses"
+            app:destination="@id/courses" />
+    </fragment>
 </navigation>
