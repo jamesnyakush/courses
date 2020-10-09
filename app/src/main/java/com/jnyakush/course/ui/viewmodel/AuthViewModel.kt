@@ -1,26 +1,43 @@
 package com.jnyakush.course.ui.viewmodel
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.jnyakush.course.data.repository.AuthRepository
-import com.jnyakush.course.utils.SessionManager
+import com.jnyakush.course.data.retrofit.response.LoginResponse
+import com.jnyakush.course.utils.Resource
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 class AuthViewModel @ViewModelInject constructor(
-    private val repository: AuthRepository,
-    private val sessionManager: SessionManager
+    private val repository: AuthRepository
 ) : ViewModel() {
 
 
-    fun signIn(email: String, password: String) {
+    private val _loginResponse: MutableLiveData<Resource<LoginResponse>> = MutableLiveData()
+    val loginResponse: LiveData<Resource<LoginResponse>>
+        get() = _loginResponse
 
-        if (email.isEmpty() || password.isEmpty()) {
-            return
-        }
-
-        //repository.signInUser(email, password)
-        //sessionManager.saveAuthToken(loginResponse!!.accessToken)
+    fun signIn(
+        email: String,
+        password: String
+    ) = viewModelScope.launch {
+        _loginResponse.value = Resource.Loading
+        _loginResponse.value = repository.signInUser(email, password)
     }
+
+    fun saveAuthToken(token: String) {
+        repository.saveToken(token)
+    }
+
+    fun fetchToken() {
+        Timber.tag("James").d(repository.fetchToken().toString())
+
+    }
+
 
     fun signUp(
         firstname: String,
@@ -28,15 +45,9 @@ class AuthViewModel @ViewModelInject constructor(
         email: String,
         phone: String,
         password: String
-    ) {
-        if (firstname.isEmpty() || lastname.isEmpty()
-            || email.isEmpty() || phone.isEmpty() ||
-            password.isEmpty()
-        ) {
-            return
-        }
+    ) = viewModelScope.launch {
 
-        //repository.signUpUser(firstname, lastname, email, phone, password)
+        repository.signUpUser(firstname, lastname, email, phone, password)
 
     }
 
