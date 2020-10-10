@@ -57,13 +57,14 @@ class CourseRepository @Inject constructor(
         apiClient.registerCourse(courseId, sessionManager.fetchStudentId().toString())
     }
 
+    suspend fun myCourses() = safeApiCall {
+        apiClient.myCourse(sessionManager.fetchStudentId().toString())
+    }
+
     suspend fun saveCourse(course: Course) = courseDao.saveCourse(course)
 
 
     fun fetchCourses(): Flow<List<Course>> = courseDao.getCourses()
 
-    fun fetchStudentId() {
-        sessionManager.fetchStudentId()
-    }
 
 }

@@ -1,10 +1,7 @@
 package com.jnyakush.course.data.retrofit
 
 import com.jnyakush.course.data.retrofit.response.*
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiClient {
 
@@ -44,6 +41,10 @@ interface ApiClient {
         @Field("student_id") studentId: String
     ): RegCourseResponse
 
+    @GET("students/{student_id}/courses")
+    suspend fun myCourse(
+        @Path("student_id") studentId: String
+    ): StudentCoursesResponse
 
     companion object {
         const val BASE_URL = "https://courses-service.herokuapp.com/"

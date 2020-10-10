@@ -60,7 +60,21 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
             }
         })
 
+        viewModel.myCourseResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        Toast.makeText(requireContext(), it.value.studentCourses.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(requireContext(), "Failed Adding", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         viewModel.fetchCourses()
+        viewModel.myCourses()
 
         add_courses.setOnClickListener {
             Navigation.findNavController(it).navigate(CoursesDirections.actionCoursesToAddCourses())

@@ -9,6 +9,7 @@ import com.jnyakush.course.data.repository.CourseRepository
 import com.jnyakush.course.data.retrofit.response.CourseResponse
 import com.jnyakush.course.data.retrofit.response.CoursesResponse
 import com.jnyakush.course.data.retrofit.response.RegCourseResponse
+import com.jnyakush.course.data.retrofit.response.StudentCoursesResponse
 import com.jnyakush.course.utils.Resource
 import kotlinx.coroutines.launch
 
@@ -32,6 +33,12 @@ class CourseViewModel @ViewModelInject constructor(
     val regCourseResponse: LiveData<Resource<RegCourseResponse>>
         get() = _regCourseResponse
 
+    private val _myCourseResponse: MutableLiveData<Resource<StudentCoursesResponse>> =
+        MutableLiveData()
+
+    val myCourseResponse: LiveData<Resource<StudentCoursesResponse>>
+        get() = _myCourseResponse
+
 
     fun addCourse(
         courseCode: String,
@@ -44,8 +51,9 @@ class CourseViewModel @ViewModelInject constructor(
             repository.postCourse(courseCode, courseName, description, instructor)
     }
 
-    fun fetchStudentId() {
-        repository.fetchStudentId()
+    fun myCourses() = viewModelScope.launch {
+        _myCourseResponse.value = Resource.Loading
+        _myCourseResponse.value = repository.myCourses()
     }
 
     fun fetchCourses() = viewModelScope.launch {
