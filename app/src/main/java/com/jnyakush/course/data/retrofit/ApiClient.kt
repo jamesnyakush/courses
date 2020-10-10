@@ -1,9 +1,6 @@
 package com.jnyakush.course.data.retrofit
 
-import com.jnyakush.course.data.retrofit.response.CourseResponse
-import com.jnyakush.course.data.retrofit.response.CoursesResponse
-import com.jnyakush.course.data.retrofit.response.LoginResponse
-import com.jnyakush.course.data.retrofit.response.RegisterResponse
+import com.jnyakush.course.data.retrofit.response.*
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -39,6 +36,13 @@ interface ApiClient {
         @Field("description") description: String,
         @Field("instructor") instructor: String
     ): CourseResponse
+
+    @FormUrlEncoded
+    @POST("register-course")
+    suspend fun registerCourse(
+        @Field("course_id") courseId: String,
+        @Field("student_id") studentId: String
+    ): RegCourseResponse
 
 
     companion object {

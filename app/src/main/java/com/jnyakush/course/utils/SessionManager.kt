@@ -23,14 +23,28 @@ class SessionManager(context: Context) {
     }
 
     /**
+     *
+     */
+    fun saveStudentId(id: String) {
+        val editor = prefs.edit()
+        editor.putString(STUDENT_ID_TOKEN, id)
+        editor.apply()
+    }
+
+    /**
      * Function to fetch auth token
      */
     fun fetchAuthToken(): String? {
         return prefs.getString(USER_TOKEN, null)
     }
 
+    fun fetchStudentId(): String? {
+        return prefs.getString(STUDENT_ID_TOKEN, null)
+    }
+
 
     companion object {
         const val USER_TOKEN = "user_token"
+        const val STUDENT_ID_TOKEN = "student_id_token"
     }
 }

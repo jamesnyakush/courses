@@ -38,6 +38,10 @@ class AuthViewModel @ViewModelInject constructor(
     }
 
 
+    fun saveStudentId(id: String) {
+        repository.saveStudentId(id)
+    }
+
     fun signUp(
         firstname: String,
         lastname: String,

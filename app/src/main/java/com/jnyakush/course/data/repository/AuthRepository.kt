@@ -23,6 +23,10 @@ class AuthRepository @Inject constructor(
         sessionManager.saveAuthToken(token)
     }
 
+    fun saveStudentId(id: String) {
+        sessionManager.saveStudentId(id)
+    }
+
     suspend fun signUpUser(
         firstname: String,
         lastname: String,

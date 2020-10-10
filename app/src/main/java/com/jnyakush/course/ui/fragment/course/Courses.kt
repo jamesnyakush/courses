@@ -10,15 +10,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jnyakush.course.R
+import com.jnyakush.course.data.db.entity.Course
 import com.jnyakush.course.ui.adapter.CourseAdapter
 import com.jnyakush.course.ui.viewmodel.CourseViewModel
+import com.jnyakush.course.utils.CourseItemClickListener
 import com.jnyakush.course.utils.Resource
+import com.jnyakush.course.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.courses_fragment.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class Courses : Fragment(R.layout.courses_fragment) {
+class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
 
     private val viewModel by viewModels<CourseViewModel>()
 
@@ -33,7 +36,7 @@ class Courses : Fragment(R.layout.courses_fragment) {
                         recycler_courses.apply {
                             layoutManager = LinearLayoutManager(requireContext())
                             hasFixedSize()
-                            adapter = CourseAdapter(it.value.courses)
+                            adapter = CourseAdapter(it.value.courses, this@Courses)
                         }
 
                     }
@@ -43,6 +46,20 @@ class Courses : Fragment(R.layout.courses_fragment) {
                 }
             }
         })
+
+        viewModel.regCourseResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                is Resource.Failure -> {
+                    Toast.makeText(requireContext(), "Failed Adding", Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+
         viewModel.fetchCourses()
 
         add_courses.setOnClickListener {
@@ -50,4 +67,13 @@ class Courses : Fragment(R.layout.courses_fragment) {
         }
 
     }
+
+    override fun onItemClick(course: Course) {
+
+        val courseId = course.courseId
+
+        viewModel.registerCourse(courseId)
+
+    }
+
 }

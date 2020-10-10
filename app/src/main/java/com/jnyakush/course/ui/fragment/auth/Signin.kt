@@ -34,6 +34,7 @@ class Signin : Fragment(R.layout.signin_fragment), View.OnClickListener {
                 is Resource.Success -> {
                     lifecycleScope.launch {
                         viewModel.saveAuthToken(it.value.accessToken)
+                        viewModel.saveStudentId(it.value.studentId)
                         requireContext().startActivity(Intent(requireContext(), Course::class.java))
                         Timber.d(it.value.message)
                     }

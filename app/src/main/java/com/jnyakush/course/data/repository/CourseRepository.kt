@@ -5,12 +5,14 @@ import com.jnyakush.course.data.db.dao.CourseDao
 import com.jnyakush.course.data.db.entity.Course
 import com.jnyakush.course.data.retrofit.ApiClient
 import com.jnyakush.course.utils.BaseRepository
+import com.jnyakush.course.utils.SessionManager
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import retrofit2.http.Field
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,7 +26,8 @@ import javax.inject.Inject
  * */
 class CourseRepository @Inject constructor(
     private val apiClient: ApiClient,
-    private val courseDao: CourseDao
+    private val courseDao: CourseDao,
+    private val sessionManager: SessionManager
 ) : BaseRepository() {
 
 
@@ -48,8 +51,19 @@ class CourseRepository @Inject constructor(
         apiClient.getCourses()
     }
 
+    suspend fun registerCourse(
+        courseId: String
+    ) = safeApiCall {
+        apiClient.registerCourse(courseId, sessionManager.fetchStudentId().toString())
+    }
+
     suspend fun saveCourse(course: Course) = courseDao.saveCourse(course)
 
 
     fun fetchCourses(): Flow<List<Course>> = courseDao.getCourses()
+
+    fun fetchStudentId() {
+        sessionManager.fetchStudentId()
+    }
+
 }
