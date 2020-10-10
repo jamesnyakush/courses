@@ -25,10 +25,24 @@ class AddCourses : Fragment(R.layout.add_courses_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeCourseResponse(view)
+
+
+        add_course.setOnClickListener {
+            onValidation()
+        }
+    }
+
+    private fun observeCourseResponse(view: View) {
         viewModel.courseResponse.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
+
+                        viewModel.saveCourse(it.value.course)
+
+                        requireContext().toast(it.value.message)
+
                         Navigation.findNavController(view)
                             .navigate(AddCoursesDirections.actionAddCoursesToCourses())
                     }
@@ -39,10 +53,6 @@ class AddCourses : Fragment(R.layout.add_courses_fragment) {
                 }
             }
         })
-
-        add_course.setOnClickListener {
-            onValidation()
-        }
     }
 
     private fun onValidation() {

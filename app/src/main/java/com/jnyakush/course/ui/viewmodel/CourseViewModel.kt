@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jnyakush.course.data.db.entity.Course
 import com.jnyakush.course.data.repository.CourseRepository
 import com.jnyakush.course.data.retrofit.response.CourseResponse
 import com.jnyakush.course.data.retrofit.response.CoursesResponse
@@ -33,11 +34,6 @@ class CourseViewModel @ViewModelInject constructor(
     val regCourseResponse: LiveData<Resource<RegCourseResponse>>
         get() = _regCourseResponse
 
-    private val _myCourseResponse: MutableLiveData<Resource<StudentCoursesResponse>> =
-        MutableLiveData()
-
-    val myCourseResponse: LiveData<Resource<StudentCoursesResponse>>
-        get() = _myCourseResponse
 
 
     fun addCourse(
@@ -51,10 +47,7 @@ class CourseViewModel @ViewModelInject constructor(
             repository.postCourse(courseCode, courseName, description, instructor)
     }
 
-    fun myCourses() = viewModelScope.launch {
-        _myCourseResponse.value = Resource.Loading
-        _myCourseResponse.value = repository.myCourses()
-    }
+
 
     fun fetchCourses() = viewModelScope.launch {
         _coursesResponse.value = Resource.Loading
@@ -66,5 +59,14 @@ class CourseViewModel @ViewModelInject constructor(
     ) = viewModelScope.launch {
         _regCourseResponse.value = Resource.Loading
         _regCourseResponse.value = repository.registerCourse(courseId)
+    }
+
+    suspend fun saveCourse(course: Course){
+        repository.saveCourse(course)
+    }
+
+    fun fetchSavedCourses(){
+        repository.fetchCourses()
+
     }
 }

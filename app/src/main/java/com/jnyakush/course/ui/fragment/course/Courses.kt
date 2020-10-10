@@ -28,7 +28,35 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeCourses()
 
+        observeRegCourse()
+
+        viewModel.fetchCourses()
+
+        add_courses.setOnClickListener {
+            Navigation.findNavController(it).navigate(CoursesDirections.actionCoursesToAddCourses())
+        }
+
+    }
+
+    private fun observeRegCourse() {
+        viewModel.regCourseResponse.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is Resource.Success -> {
+                    lifecycleScope.launch {
+                        requireContext().toast("Added")
+                    }
+                }
+
+                is Resource.Failure -> {
+                    requireContext().toast("Failed Adding")
+                }
+            }
+        })
+    }
+
+    private fun observeCourses() {
         viewModel.coursesResponse.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
@@ -46,48 +74,12 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
                 }
             }
         })
-
-        viewModel.regCourseResponse.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    lifecycleScope.launch {
-                        Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT).show()
-                    }
-                }
-                is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Failed Adding", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-
-        viewModel.myCourseResponse.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                is Resource.Success -> {
-                    lifecycleScope.launch {
-                        Toast.makeText(requireContext(), it.value.studentCourses.toString(), Toast.LENGTH_SHORT).show()
-                    }
-                }
-                is Resource.Failure -> {
-                    Toast.makeText(requireContext(), "Failed Adding", Toast.LENGTH_SHORT).show()
-                }
-            }
-        })
-
-        viewModel.fetchCourses()
-        viewModel.myCourses()
-
-        add_courses.setOnClickListener {
-            Navigation.findNavController(it).navigate(CoursesDirections.actionCoursesToAddCourses())
-        }
-
     }
 
     override fun onItemClick(course: Course) {
-
         val courseId = course.courseId
 
         viewModel.registerCourse(courseId)
-
     }
 
 }

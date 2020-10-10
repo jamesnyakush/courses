@@ -1,6 +1,7 @@
 package com.jnyakush.course.data.repository
 
 
+import androidx.lifecycle.LiveData
 import com.jnyakush.course.data.db.dao.CourseDao
 import com.jnyakush.course.data.db.entity.Course
 import com.jnyakush.course.data.retrofit.ApiClient
@@ -37,7 +38,7 @@ class CourseRepository @Inject constructor(
      * @param courseName
      * @param description
      * @param instructor
-     * */
+     */
     suspend fun postCourse(
         courseCode: String,
         courseName: String,
@@ -47,24 +48,34 @@ class CourseRepository @Inject constructor(
         apiClient.createCourse(courseCode, courseName, description, instructor)
     }
 
+    /**
+     *
+     */
     suspend fun getCourse() = safeApiCall {
         apiClient.getCourses()
     }
 
+
+    /**
+     *
+     */
     suspend fun registerCourse(
         courseId: String
     ) = safeApiCall {
         apiClient.registerCourse(courseId, sessionManager.fetchStudentId().toString())
     }
 
-    suspend fun myCourses() = safeApiCall {
-        apiClient.myCourse(sessionManager.fetchStudentId().toString())
-    }
 
+    /**
+     *
+     */
     suspend fun saveCourse(course: Course) = courseDao.saveCourse(course)
 
 
-    fun fetchCourses(): Flow<List<Course>> = courseDao.getCourses()
+    /**
+     *
+     */
+    fun fetchCourses(): LiveData<List<Course>> = courseDao.getCourses()
 
 
 }

@@ -23,4 +23,9 @@
             android:id="@+id/action_addCourses_to_courses"
             app:destination="@id/courses" />
     </fragment>
+    <fragment
+        android:id="@+id/myCourses"
+        android:name="com.jnyakush.course.ui.fragment.course.MyCourses"
+        android:label="my_courses_fragment"
+        tools:layout="@layout/my_courses_fragment" />
 </navigation>
