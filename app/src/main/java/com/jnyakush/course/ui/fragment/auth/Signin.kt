@@ -28,15 +28,27 @@ class Signin : Fragment(R.layout.signin_fragment), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeLogin()
 
+        login_btn.setOnClickListener(this)
+        need_account.setOnClickListener(this)
+
+    }
+
+    private fun observeLogin() {
         viewModel.loginResponse.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
                         viewModel.saveAuthToken(it.value.accessToken)
                         viewModel.saveStudentId(it.value.studentId)
-                        requireContext().startActivity(Intent(requireContext(), Course::class.java))
-                        Timber.d(it.value.message)
+
+                        Intent(requireContext(),Course::class.java).also {intent->
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+
+                        //requireContext().startActivity(Intent(requireContext(), Course::class.java))
                     }
                 }
                 is Resource.Failure -> {
@@ -44,10 +56,6 @@ class Signin : Fragment(R.layout.signin_fragment), View.OnClickListener {
                 }
             }
         })
-
-        login_btn.setOnClickListener(this)
-        need_account.setOnClickListener(this)
-
     }
 
     private fun onValidate() {

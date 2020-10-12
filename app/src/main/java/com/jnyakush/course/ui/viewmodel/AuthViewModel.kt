@@ -33,12 +33,12 @@ class AuthViewModel @ViewModelInject constructor(
         _loginResponse.value = repository.signInUser(email, password)
     }
 
-    fun saveAuthToken(token: String) {
+    suspend fun saveAuthToken(token: String) {
         repository.saveToken(token)
     }
 
 
-    fun saveStudentId(id: String) {
+    suspend fun saveStudentId(id: String) {
         repository.saveStudentId(id)
     }
 

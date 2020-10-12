@@ -40,6 +40,9 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
 
     }
 
+    /**
+     *  We are Observing  our Register Course  here
+     */
     private fun observeRegCourse() {
         viewModel.regCourseResponse.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -56,6 +59,9 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
         })
     }
 
+    /**
+     *  We are Observing  our Courses  here
+     */
     private fun observeCourses() {
         viewModel.coursesResponse.observe(viewLifecycleOwner, Observer {
             when (it) {
@@ -76,6 +82,9 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
         })
     }
 
+    /**
+     *  We are Listening  for Register Course OnClick
+     */
     override fun onItemClick(course: Course) {
         val courseId = course.courseId
 

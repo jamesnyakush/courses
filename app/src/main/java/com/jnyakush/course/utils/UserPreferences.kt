@@ -14,7 +14,7 @@ class UserPreferences(
 
     init {
         dataStore = applicationContext.createDataStore(
-            name = "my_data_store"
+            name = "user_store"
         )
     }
 
@@ -22,6 +22,18 @@ class UserPreferences(
         get() = dataStore.data.map { preferences ->
             preferences[KEY_AUTH]
         }
+
+    val fetchStudentId: Flow<String?>
+        get() = dataStore.data.map { preferences ->
+            preferences[STUDENT_ID]
+        }
+
+    suspend fun saveStudentId(id: String) {
+        dataStore.edit { preferences ->
+
+            preferences[STUDENT_ID] = id
+        }
+    }
 
     suspend fun saveAuthToken(authToken: String) {
         dataStore.edit { preferences ->
@@ -37,6 +49,7 @@ class UserPreferences(
 
     companion object {
         private val KEY_AUTH = preferencesKey<String>("key_auth")
+        private val STUDENT_ID = preferencesKey<String>("student_id")
     }
 
 }

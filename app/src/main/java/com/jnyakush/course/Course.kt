@@ -18,12 +18,22 @@ class Course : Application() {
     }
 
 
+    /**
+    *  We will use stetho to get a visual structure of our persistence db (room)
+    *  For more info visit http://facebook.github.io/stetho/
+    *  open Chrome and use this url chrome://inspect/
+    *
+    */
     private fun initStetho() {
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this)
         }
     }
 
+    /**
+     *  We will use Timber to log this logs wont project on production mode
+     *  For more info visit https://github.com/JakeWharton/timber
+     */
     private fun initTimber() {
         if (BuildConfig.DEBUG) {
             Timber.plant(object : Timber.DebugTree() {

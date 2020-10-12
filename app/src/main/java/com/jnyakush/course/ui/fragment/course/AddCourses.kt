@@ -67,6 +67,7 @@ class AddCourses : Fragment(R.layout.add_courses_fragment) {
             requireContext().toast("All Fields are Required")
             return
         }
+
         viewModel.addCourse(coursecode, coursename, description, instructor)
     }
 }

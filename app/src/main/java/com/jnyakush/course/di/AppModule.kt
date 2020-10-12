@@ -3,7 +3,9 @@ package com.jnyakush.course.di
 import android.content.Context
 import com.jnyakush.course.utils.AuthInterceptor
 import com.jnyakush.course.data.retrofit.ApiClient
+import com.jnyakush.course.utils.Auth
 import com.jnyakush.course.utils.SessionManager
+import com.jnyakush.course.utils.UserPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -52,5 +54,6 @@ object AppModule {
     @Singleton
     fun providesSessionManager(@ApplicationContext context: Context): SessionManager =
         SessionManager(context)
+
 
 }

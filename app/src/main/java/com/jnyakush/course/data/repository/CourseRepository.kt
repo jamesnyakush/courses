@@ -7,6 +7,7 @@ import com.jnyakush.course.data.db.entity.Course
 import com.jnyakush.course.data.retrofit.ApiClient
 import com.jnyakush.course.utils.BaseRepository
 import com.jnyakush.course.utils.SessionManager
+import com.jnyakush.course.utils.UserPreferences
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
