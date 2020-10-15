@@ -70,7 +70,7 @@ class CourseRepository @Inject constructor(
     /**
      *
      */
-    suspend fun saveCourse(course: Course) = courseDao.saveCourse(course)
+    suspend fun saveCourse(course: List<Course>) = courseDao.saveCourse(course)
 
 
     /**

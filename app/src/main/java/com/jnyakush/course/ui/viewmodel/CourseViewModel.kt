@@ -61,7 +61,7 @@ class CourseViewModel @ViewModelInject constructor(
         _regCourseResponse.value = repository.registerCourse(courseId)
     }
 
-    suspend fun saveCourse(course: Course){
+    suspend fun saveCourse(course: List<Course>){
         repository.saveCourse(course)
     }
 

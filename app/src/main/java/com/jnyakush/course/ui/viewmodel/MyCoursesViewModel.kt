@@ -33,7 +33,7 @@ class MyCoursesViewModel @ViewModelInject constructor(
     /**
      *
      */
-    fun saveMyCourse(course: MyCourse) = viewModelScope.launch {
+    fun saveMyCourse(course: List<MyCourse>) = viewModelScope.launch {
         repository.saveMyCourse(course)
     }
 

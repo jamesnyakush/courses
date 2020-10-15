@@ -11,13 +11,13 @@ import com.jnyakush.course.data.db.entity.MyCourse
 @Dao
 interface CourseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveCourse(courses: Course)
+    suspend fun saveCourse(courses: List<Course>)
 
     @Query("SELECT * FROM courses")
     fun getCourses(): LiveData<List<Course>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveMyCourse(myCourse: MyCourse)
+    suspend fun saveMyCourse(myCourse: List<MyCourse>)
 
     @Query("SELECT * FROM my_courses")
     fun getMyCourses(): LiveData<List<MyCourse>>

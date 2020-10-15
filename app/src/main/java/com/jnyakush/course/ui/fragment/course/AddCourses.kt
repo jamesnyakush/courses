@@ -39,7 +39,7 @@ class AddCourses : Fragment(R.layout.add_courses_fragment) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
 
-                        viewModel.saveCourse(it.value.course)
+
 
                         requireContext().toast(it.value.message)
 

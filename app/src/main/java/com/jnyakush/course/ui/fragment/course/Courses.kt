@@ -67,6 +67,7 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
             when (it) {
                 is Resource.Success -> {
                     lifecycleScope.launch {
+                        viewModel.saveCourse(it.value.courses)
                         recycler_courses.apply {
                             layoutManager = LinearLayoutManager(requireContext())
                             hasFixedSize()
