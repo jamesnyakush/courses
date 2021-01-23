@@ -2,10 +2,8 @@ package com.jnyakush.course.ui.fragment.auth
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -14,16 +12,15 @@ import com.jnyakush.course.ui.activity.Course
 import com.jnyakush.course.ui.viewmodel.AuthViewModel
 import com.jnyakush.course.utils.Resource
 import com.jnyakush.course.utils.toast
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.signin_fragment.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
-@AndroidEntryPoint
 class Signin : Fragment(R.layout.signin_fragment), View.OnClickListener {
 
-    private val viewModel by viewModels<AuthViewModel>()
+    private val viewModel: AuthViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,8 +40,9 @@ class Signin : Fragment(R.layout.signin_fragment), View.OnClickListener {
                         viewModel.saveAuthToken(it.value.accessToken)
                         viewModel.saveStudentId(it.value.studentId)
 
-                        Intent(requireContext(),Course::class.java).also {intent->
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        Intent(requireContext(), Course::class.java).also { intent ->
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                             startActivity(intent)
                         }
 

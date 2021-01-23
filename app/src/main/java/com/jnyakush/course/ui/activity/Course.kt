@@ -1,19 +1,17 @@
 package com.jnyakush.course.ui.activity
 
 import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.jnyakush.course.BuildConfig
 import com.jnyakush.course.R
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.course_activity.*
 
 
-@AndroidEntryPoint
 class Course : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")

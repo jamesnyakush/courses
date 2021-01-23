@@ -2,33 +2,41 @@ package com.jnyakush.course
 
 import android.app.Application
 import androidx.annotation.Nullable
-import com.facebook.stetho.Stetho
-import dagger.hilt.android.HiltAndroidApp
+import com.jnyakush.course.di.appModules
 import org.jetbrains.annotations.NotNull
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.module.Module
 import timber.log.Timber
 
-@HiltAndroidApp
+
 class Course : Application() {
 
     override fun onCreate() {
         super.onCreate()
 
-        initStetho()
+        initKoin()
         initTimber()
     }
 
-
     /**
-    *  We will use stetho to get a visual structure of our persistence db (room)
-    *  For more info visit http://facebook.github.io/stetho/
-    *  open Chrome and use this url chrome://inspect/
-    *
-    */
-    private fun initStetho() {
-        if (BuildConfig.DEBUG) {
-            Stetho.initializeWithDefaults(this)
+     *  We will use Koin to access modules
+     *  For more info visit https://insert-koin.io/
+     */
+    private fun initKoin() {
+        startKoin {
+            androidLogger()
+            androidContext(this@Course)
+
+            val modules = mutableListOf<Module>().apply {
+                addAll(appModules)
+            }
+
+            modules(modules)
         }
     }
+
 
     /**
      *  We will use Timber to log this logs wont project on production mode

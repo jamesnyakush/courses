@@ -1,6 +1,6 @@
 package com.jnyakush.course.di
 
-import android.content.Context
+/*import android.content.Context
 import com.jnyakush.course.utils.AuthInterceptor
 import com.jnyakush.course.data.retrofit.ApiClient
 import com.jnyakush.course.utils.Auth
@@ -35,9 +35,9 @@ object AppModule {
         retrofit.create(ApiClient::class.java)
 
 
-    /**
+    *//**
      * Initialize OkhttpClient with our interceptor
-     */
+     *//*
     @Provides
     @Singleton
     fun providesOkhttpClient(authInterceptor: AuthInterceptor): OkHttpClient =
@@ -56,4 +56,4 @@ object AppModule {
         SessionManager(context)
 
 
-}
+}*/

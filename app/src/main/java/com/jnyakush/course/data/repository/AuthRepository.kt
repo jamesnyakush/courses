@@ -3,9 +3,6 @@ package com.jnyakush.course.data.repository
 import com.jnyakush.course.data.retrofit.ApiClient
 import com.jnyakush.course.utils.BaseRepository
 import com.jnyakush.course.utils.SessionManager
-import com.jnyakush.course.utils.UserPreferences
-import javax.inject.Inject
-
 
 
 /**
@@ -15,7 +12,8 @@ import javax.inject.Inject
  * @param userPreferences
  *
  */
-class AuthRepository @Inject constructor(
+
+class AuthRepository(
     private val apiClient: ApiClient,
     private val sessionManager: SessionManager
 ) : BaseRepository() {
@@ -55,18 +53,14 @@ class AuthRepository @Inject constructor(
     /**
      * @param token
      */
-     fun saveToken(token: String) {
+    fun saveToken(token: String) {
         sessionManager.saveAuthToken(token)
     }
 
     /**
      * @param id
      */
-     fun saveStudentId(id: String) {
+    fun saveStudentId(id: String) {
         sessionManager.saveStudentId(id)
     }
-
-
-
-
 }

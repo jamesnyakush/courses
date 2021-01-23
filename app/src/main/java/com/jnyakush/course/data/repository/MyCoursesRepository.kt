@@ -2,17 +2,13 @@ package com.jnyakush.course.data.repository
 
 import androidx.lifecycle.LiveData
 import com.jnyakush.course.data.db.dao.CourseDao
-import com.jnyakush.course.data.db.entity.Course
 import com.jnyakush.course.data.db.entity.MyCourse
 import com.jnyakush.course.data.retrofit.ApiClient
 import com.jnyakush.course.utils.BaseRepository
 import com.jnyakush.course.utils.SessionManager
-import com.jnyakush.course.utils.UserPreferences
-import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 
-class MyCoursesRepository @Inject constructor(
+class MyCoursesRepository(
     private val apiClient: ApiClient,
     private val sessionManager: SessionManager,
     private val courseDao: CourseDao

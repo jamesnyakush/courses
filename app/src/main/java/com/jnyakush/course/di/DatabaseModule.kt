@@ -1,5 +1,6 @@
 package com.jnyakush.course.di
 
+/*
 import android.content.Context
 import androidx.room.Room
 import com.jnyakush.course.data.db.AppDatabase
@@ -28,4 +29,4 @@ object DatabaseModule {
         appDatabase.courseDao()
 
 
-}
+}*/
