@@ -13,6 +13,9 @@ interface CourseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveCourse(courses: List<Course>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addCourse(course: Course)
+
     @Query("SELECT * FROM courses")
     fun getCourses(): LiveData<List<Course>>
 
