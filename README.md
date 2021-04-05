@@ -1,5 +1,5 @@
 # Courses App
-
+[![codebeat badge](https://codebeat.co/badges/6a0e57c1-de21-4be4-82c4-a4e5a0f75e4b)](https://codebeat.co/projects/github-com-jamesnyakush-courses-master) [![Maintainability](https://api.codeclimate.com/v1/badges/850a69f26e1436c11e33/maintainability)](https://codeclimate.com/github/jamesnyakush/courses/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/850a69f26e1436c11e33/test_coverage)](https://codeclimate.com/github/jamesnyakush/courses/test_coverage)
 
 ## Screenshots
 
