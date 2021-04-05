@@ -73,7 +73,6 @@ class Courses : Fragment(R.layout.courses_fragment), CourseItemClickListener {
                             hasFixedSize()
                             adapter = CourseAdapter(it.value.courses, this@Courses)
                         }
-
                     }
                 }
                 is Resource.Failure -> {

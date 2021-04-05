@@ -42,7 +42,7 @@ class AppDatabaseTest : TestCase() {
             "ABCD",
             "Alphabets",
             "Learning to say alphabets",
-            "jjnyakush"
+            "jnyakush"
         )
 
         courseDao.addCourse(course)
