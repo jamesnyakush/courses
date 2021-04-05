@@ -7,7 +7,6 @@
 | ------ | ----- | ------ |
 | ![Login](/art/login.png) | ![Register](/art/register.png) | ![Dashboard](/art/dashboard.png) | 
 | Navigation | My Courses | Add Course |
-| ------ | ----- | ------ |
 | ![Navigation](/art/navigation.png) | ![My Courses](/art/mycorse.png) | ![Add Course](/art/addcourse.png) | 
 
 
