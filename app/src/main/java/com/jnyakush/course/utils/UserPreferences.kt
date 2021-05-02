@@ -20,7 +20,7 @@ class UserPreferences(
 
     val authToken: Flow<String?>
         get() = dataStore.data.map { preferences ->
-            preferences[KEY_AUTH]
+            preferences[KEY_AUTH] ?: ""
         }
 
     val fetchStudentId: Flow<String?>

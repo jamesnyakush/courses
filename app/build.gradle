@@ -81,7 +81,6 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation 'com.facebook.stetho:stetho:1.5.1'
 
 
     // Room components

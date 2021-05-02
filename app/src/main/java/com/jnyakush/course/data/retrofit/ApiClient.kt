@@ -41,6 +41,7 @@ interface ApiClient {
         @Field("student_id") studentId: String
     ): RegCourseResponse
 
+
     @GET("students/{student_id}/courses")
     suspend fun myCourse(
         @Path("student_id") studentId: String

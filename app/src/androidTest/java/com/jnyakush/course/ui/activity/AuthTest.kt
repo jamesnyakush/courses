@@ -25,7 +25,8 @@ class AuthTest {
     }
 
     @Test
-    fun is_fragment_in_view() {
+    fun `is_fragment_in_view`() {
         onView(withId(R.id.fragment)).check(matches(isDisplayed()))
     }
+
 }
