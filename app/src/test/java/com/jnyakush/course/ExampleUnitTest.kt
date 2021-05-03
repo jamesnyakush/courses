@@ -19,4 +19,8 @@ class ExampleUnitTest {
     fun `test is activity in view`() {
         TODO("Not yet implemented")
     }
+
+    @Test
+    fun `$fun_name`(){
+    }
 }

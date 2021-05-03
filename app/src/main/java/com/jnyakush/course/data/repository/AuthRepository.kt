@@ -65,8 +65,4 @@ class AuthRepository @Inject constructor(
      fun saveStudentId(id: String) {
         sessionManager.saveStudentId(id)
     }
-
-
-
-
 }
